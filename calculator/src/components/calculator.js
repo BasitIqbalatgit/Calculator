@@ -14,9 +14,12 @@ function Calculator() {
   const [result, setResult] = useState(null);
 
     const handlePress =(btn)=>{
-        if(btn === '+' || btn === '-' ||btn === 'x' || btn === '/' || btn === '%' ||btn === '+/-' )
+        if(btn === '+' || btn === '-' ||btn === 'x' || btn === '/' )
         {
             handleOperationPress(btn);
+        }
+        else if( btn === '%' ||btn === '+/-' ){
+          handleOneStepOperation(btn);
         }
         else if(btn === 'C')
         {
@@ -53,6 +56,30 @@ function Calculator() {
       setFirstNumber("");
     }
   };
+// ...
+
+const handleOneStepOperation = (buttonValue) => {
+  switch (buttonValue) {
+    case "%":
+      if (firstNumber !== "" || result!=='') {
+        const percentageValue = parseInt(firstNumber) / 100;
+        setFirstNumber(percentageValue.toString());
+      }
+      break;
+    case "+/-":
+      if (firstNumber !== "") {
+        const negatedValue = parseInt(firstNumber) * -1;
+        setFirstNumber(negatedValue.toString());
+      }
+      break;
+    default:
+      break;
+  }
+};
+
+
+
+
   
 
   const clear = () => {
@@ -111,18 +138,10 @@ function Calculator() {
             clear();
             setResult(parseInt(secondNumber) / parseInt(firstNumber));
             break;
-        // case "%":
-            
-        //     if (firstNumber !== "") {
-        //       const percentageResult = parseFloat(firstNumber) / 100;
-        //       clear();
-        //       setResult(percentageResult.toString());
-        //     }
-            
-        //     break;
+       
         default:
             clear();
-            setResult(0);
+            setResult(null);
             break;
         }
     };
@@ -137,7 +156,8 @@ function Calculator() {
     ]
 
     return (
-        <View style={{ position:"absolute", bottom:50}}>
+        <View style={{ position:"absolute", bottom:50,
+        }}>
             <View
         style={{
           height: 120,
@@ -153,13 +173,13 @@ function Calculator() {
         {firstNumberDisplay()}
       </View>
 
-
+<View style={inputStyle.horizontalLine} />
 
             <View style={ButtonStyles.buttonContainer}>
             {
-                btns.map((btn) => (
-  <TouchableOpacity key={btn} style={ButtonStyles.btn} onPress={()=>handlePress(btn)}>
-    <Text style={ButtonStyles.buttonTxt}>{btn}</Text>
+                btns.map((btn,index) => (
+  <TouchableOpacity key={btn} style={[ButtonStyles.btn, ((index+1)%4)==0 ? {backgroundColor:"rgb(95, 82, 179)"}: "" ]} onPress={()=>handlePress(btn)}>
+    <Text style={[ButtonStyles.buttonTxt,((index+1)%4)==0 ? {color:"white"}: "" ]}>{btn}</Text>
   </TouchableOpacity>
 ))
 

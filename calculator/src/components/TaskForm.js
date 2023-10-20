@@ -51,13 +51,62 @@ const TaskForm = () => {
   return height > width;
 };
 
+const styles = StyleSheet.create({
+  container: {
+   flex: 1,
+   padding: 20,
+   
+ },
+ row: {
+   marginBottom: 20,
+   marginRight:20,
+   width: isPortrait() ? "auto" : "50%",
+ },
+ inline: {
+   flexDirection: 'row',
+   alignItems: 'center',
+   marginBottom: 10,
+ },
+ input: {
+   borderWidth: 1,
+   borderColor: 'gray',
+   borderRadius: 8,
+   padding: 8,
+ },
+ dropdown: {
+   width: '100%',
+   borderWidth: 1,
+   borderColor: 'gray',
+   borderRadius: 8,
+   padding: 8,
+ },
+ dropdownButton: {
+   flexDirection: 'row',
+   justifyContent: 'space-between',
+   alignItems: 'center',
+ },
+ checkboxContainer: {
+   flexDirection: 'row',
+   marginBottom: 10,
+ },
+ submitButton: {
+   backgroundColor: 'blue',
+   padding: 10,
+   borderRadius: 8,
+   alignItems: 'center',
+ },
+ submitButtonText: {
+   color: 'white',
+   fontWeight: 'bold',
+ },
+});
 
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1 , alignItems:"center",justifyContent:"center"}}>
       <View style={styles.container}>
         {/* Email and Name ---------------------------> */}
-        <View style={isPortrait() ? { flexDirection: 'column' } : { flexDirection: 'row' }}>
+        <View style={isPortrait() ? { flexDirection: 'column' } : { flexDirection: 'row',width:"100%" }}>
 
        <View style={styles.row}>
           <Text>Email</Text>
@@ -86,6 +135,7 @@ const TaskForm = () => {
 
         <View style={styles.row}>
           <Text>Gender</Text>
+          <View style={{flexDirection:"row"}}>
           <View style={styles.inline}>
             <RadioButton
               value="male"
@@ -101,6 +151,7 @@ const TaskForm = () => {
               onPress={() => setGender('female')}
             />
             <Text>Female</Text>
+          </View>
           </View>
         </View>
 
@@ -164,61 +215,17 @@ const TaskForm = () => {
       
 
         {/* Submit Button ---------------------------> */}
+        <View>
         <TouchableOpacity style={styles.submitButton}>
           <Text style={styles.submitButtonText}>Submit</Text>
         </TouchableOpacity>
-
+          </View>
         </View>
       </View>
     </SafeAreaView>
   );
 };
 
-const styles = StyleSheet.create({
-   container: {
-    flex: 1,
-    padding: 20,
-  },
-  row: {
-    marginBottom: 20,
-  },
-  inline: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 10,
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: 'gray',
-    borderRadius: 8,
-    padding: 8,
-  },
-  dropdown: {
-    width: '100%',
-    borderWidth: 1,
-    borderColor: 'gray',
-    borderRadius: 8,
-    padding: 8,
-  },
-  dropdownButton: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  checkboxContainer: {
-    flexDirection: 'row',
-    marginBottom: 10,
-  },
-  submitButton: {
-    backgroundColor: 'blue',
-    padding: 10,
-    borderRadius: 8,
-    alignItems: 'center',
-  },
-  submitButtonText: {
-    color: 'white',
-    fontWeight: 'bold',
-  },
-});
+
 
 export default TaskForm;

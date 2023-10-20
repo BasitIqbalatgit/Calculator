@@ -4,18 +4,19 @@ export const ButtonStyles = StyleSheet.create({
     btn: {
       width: 70,
       height: 70,
-      backgroundColor: "black",
+      backgroundColor: "white",
       alignItems: "center",
       justifyContent: "center",
       borderRadius: 20,
+      // borderWidth:0.2,
       borderColor: "black",
       shadowColor: "black",
-      elevation: 10,
-      margin: 10,
+      elevation: 20,
+      margin: 8,
     },
     buttonTxt: {
       fontSize: 30,
-      color: "white",
+      color: "black",
     },
     buttonContainer: {
       flex: 1,
